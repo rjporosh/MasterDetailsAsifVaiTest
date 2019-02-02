@@ -1,0 +1,43 @@
+   public JsonResult GetProductCategories()
+        {
+            List<Category> categories;
+            using (DbTestEntities dc = new DbTestEntities())
+            {
+                categories = dc.Categories.OrderBy(a => a.CategortyName).ToList();
+            }
+            return new JsonResult { Data = categories, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        public JsonResult GetProducts(int categoryID)
+        {
+            List<Product> products = new List<Product>();
+            using (DbTestEntities dc = new DbTestEntities())
+            {
+                products = dc.Products.Where(a => a.CategoryID.Equals(categoryID)).OrderBy(a => a.ProductName).ToList();
+            }
+            return new JsonResult { Data = products, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+        [HttpPost]
+        public JsonResult Save(OrderMaster order)
+        {
+            bool status = false;
+            DateTime dateOrg;
+            var isValidDate = DateTime.TryParseExact(order.OrderDate.ToString(), "mm-dd-yyyy", null,
+                System.Globalization.DateTimeStyles.None, out dateOrg);
+            if (isValidDate)
+            {
+                order.OrderDate = dateOrg;
+            }
+
+            var isValidModel = TryUpdateModel(order);
+            if (isValidModel)
+            {
+                using (DbTestEntities dc = new DbTestEntities())
+                {
+                    dc.OrderMasters.Add(order);
+                    dc.SaveChanges();
+                    status = true;
+                }
+            }
+            return new JsonResult { Data = new { status = status } };
+        }
+    }
