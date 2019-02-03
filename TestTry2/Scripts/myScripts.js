@@ -101,7 +101,7 @@ $(document).ready(function () {
             $("#productCategory,#product,#quantity,#rate,#add", $newRow).removeAttr("id");
             $("span.error", $newRow).remove();
             //append clone row
-            $("#order-detailsItems").append($newRow);
+            $("#orderdetailsItems").append($newRow);
 
             //clear select data
             $("#productCategory,#product").val("0");
@@ -112,7 +112,7 @@ $(document).ready(function () {
     });
 
     //remove button click event
-    $("#order-detailsItems").on("click", ".remove", function () {
+    $("#orderdetailsItems").on("click", ".remove", function () {
         $(this).parents("tr").remove();
     });
 
@@ -123,7 +123,7 @@ $(document).ready(function () {
         $("#orderItemError").text("");
         var list = [];
         var errorItemCount = 0;
-        $("#order-detailsItems tbody tr").each(function (index, ele) {
+        $("#orderdetailsItems tbody tr").each(function (index, ele) {
             if (
                 $("select.product", this).val() === "0" ||
                     (parseInt($(".quantity", this).val()) || 0) === 0 ||
@@ -142,12 +142,13 @@ $(document).ready(function () {
             }
         });
 
-        if (errorItemCount > 0) {
+        if (errorItemCount !== 0) {
             $("#orderItemError").text(errorItemCount + " invalid entry in order item list.");
             isAllValid = false;
         }
 
-        if (list.length === 0) {
+        if (list.length === 0)
+        {
             $("#orderItemError").text("At least 1 order item required.");
             isAllValid = false;
         }

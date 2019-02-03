@@ -30,7 +30,7 @@ namespace TestTry2.Controllers
         public JsonResult GetProductCategories()
         {
             List<Category> categories;
-            using (DbTestEntities dc = new DbTestEntities())
+            using (DbEntities dc = new DbEntities())
             {
                 categories = dc.Categories.OrderBy(a => a.CategortyName).ToList();
             }
@@ -39,7 +39,7 @@ namespace TestTry2.Controllers
         public JsonResult GetProducts(int categoryID)
         {
             List<Product> products = new List<Product>();
-            using (DbTestEntities dc = new DbTestEntities())
+            using (DbEntities dc = new DbEntities())
             {
                 products = dc.Products.Where(a => a.CategoryID.Equals(categoryID)).OrderBy(a => a.ProductName).ToList();
             }
@@ -60,7 +60,7 @@ namespace TestTry2.Controllers
             var isValidModel = TryUpdateModel(order);
             if (isValidModel)
             {
-                using (DbTestEntities dc = new DbTestEntities())
+                using (DbEntities dc = new DbEntities())
                 {
                     dc.OrderMasters.Add(order);
                     dc.SaveChanges();
