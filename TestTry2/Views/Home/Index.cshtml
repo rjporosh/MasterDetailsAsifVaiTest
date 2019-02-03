@@ -1,14 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<head>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <script src="~/Scripts/myScripts.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-</head>
-<h2>Order And Details</h2>
-
+<h2>Master details entry form</h2>
 <div class="container">
     <div class="master">
         <h2>Order</h2>
@@ -45,7 +38,7 @@
                 <td>Rate</td>
                 <td>&nbsp;</td>
             </tr>
-            <tr class="mycontainer" id="main-row">
+            <tr class="mycontainer" id="mainrow">
                 <td>
                     <select id="productCategory" class="pc form-control" onchange="LoadProduct(this)">
                         <option>Select</option>
@@ -59,11 +52,11 @@
                     <span class="error">Select product</span>
                 </td>
                 <td>
-                    <input type="text" id="quantity" class="form-control" />
+                    <input type="text" id="quantity" class="quantity form-control" />
                     <span class="error">Valid quantity required</span>
                 </td>
                 <td>
-                    <input type="text" id="rate" class="form-control" />
+                    <input type="text" id="rate" class="rate form-control" />
                     <span class="error">Valid rate required</span>
                 </td>
                 <td>
@@ -86,10 +79,9 @@
 <script src="~/Scripts/myScripts.js"></script>
 <script type="text/javascript">
     $(function () {
-// ReSharper disable once PossiblyUnassignedProperty
-        $("#orderDate").datepicker({
+        $('#orderDate').datepicker({
             dateFormat: 'mm-dd-yy'
-        });
+        })
     })
 </script>
 <style>
@@ -101,9 +93,7 @@
     }
 
     tr.error {
-        background-color: #ff0000;
         background-color: rgba(255,0,0,0.35);
     }
-
-    .mycontainer { }
 </style>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>  
